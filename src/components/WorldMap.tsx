@@ -4,15 +4,30 @@ import { useMarkerStore } from "../store/marker-store";
 import Markers from "../types/markers";
 
 export default function WorldMap() {
-  const markers = useMarkerStore((state) => state.markers);
+  const { setZoom, setCenterFocus } = useMarkerStore();
 
+  const markers = useMarkerStore((state) => state.markers);
+  const centerFocus = useMarkerStore((state) => state.centerFocus);
+  const defaultCenter = useMarkerStore((state) => state.defaultCenter);
+  const zoom = useMarkerStore((state) => state.zoom);
+
+  const unlockMap = () => {
+    setCenterFocus(null);
+  };
+  const unlockZoom = () => {
+    setZoom(null);
+  };
   return (
     <div>
       <APIProvider apiKey={GOOGLE_API_KEY}>
         <Map
+          onDrag={unlockMap}
           style={{ width: "100%", height: "100vh" }}
-          defaultCenter={{ lat: -33.860664, lng: 151.208138 }}
+          defaultCenter={defaultCenter}
+          center={centerFocus ? centerFocus : null}
           defaultZoom={15}
+          zoom={zoom}
+          onZoomChanged={unlockZoom}
           gestureHandling={"greedy"}
           disableDefaultUI={true}
         >

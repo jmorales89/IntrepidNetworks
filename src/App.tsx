@@ -5,21 +5,22 @@ import WorldMap from "./components/WorldMap";
 import MapMarkers from "./components/MapMarkers";
 import { useMarkerStore } from "./store/marker-store";
 
-function App() {
-  const { setMarkers } = useMarkerStore();
-
+function App() {  
+  const { setMarkers, setDefaultCenter,setCenterFocus } = useMarkerStore();
   useEffect(() => {
     const fetchMarkers = async () => {
       try {
         const response = await fetchAllMarkers();
         setMarkers(response.data)
+        setDefaultCenter(response.data[0]);
+        setCenterFocus(response.data[0]);
         console.log(response);
       } catch (e) {
         console.error(e);
       }
     };
     fetchMarkers();
-  }, []);
+  }, [setMarkers, setDefaultCenter, setCenterFocus]);
 
   return (
     <>
