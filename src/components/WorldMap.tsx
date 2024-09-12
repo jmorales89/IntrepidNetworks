@@ -2,15 +2,21 @@ import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 import GOOGLE_API_KEY from "../utils/google-map-api";
 import { useMarkerStore } from "../store/marker-store";
 import Markers from "../types/markers";
+import DialogPopUp from "./DialogPopUp";
 
 export default function WorldMap() {
-  const { setZoom, setCenterFocus } = useMarkerStore();
+  const { setZoom, setCenterFocus, setSelectedMarker, setMarkerPopUp } = useMarkerStore();
 
   const markers = useMarkerStore((state) => state.markers);
   const centerFocus = useMarkerStore((state) => state.centerFocus);
   const defaultCenter = useMarkerStore((state) => state.defaultCenter);
   const zoom = useMarkerStore((state) => state.zoom);
 
+  const displayData = (marker: Markers) => {
+    console.log(marker)
+    setSelectedMarker(marker);
+    setMarkerPopUp(true)
+  };
   const unlockMap = () => {
     setCenterFocus(null);
   };
@@ -36,8 +42,12 @@ export default function WorldMap() {
               return (
                 <div key={marker.id}>
                   <Marker
+                  onClick={() => {
+                    displayData(marker);
+                  }}
                     position={{ lat: marker.latitude, lng: marker.longitude }}
                   />
+                  <DialogPopUp/>
                 </div>
               );
             })}

@@ -6,13 +6,15 @@ type MarkersStore = {
   markers: Markers[];
   defaultCenter: Center;
   centerFocus: Center | null;
-  selectedMarker: Markers,  
+  selectedMarker: Markers;
   zoom: number | null;
+  markerPopUpVisible: boolean;
   setDefaultCenter: (marker: Markers) => void;
   setZoom: (zoom: number | null) => void;
   setCenterFocus: (marker: Markers | null) => void;
-  setSelectedMarker: (marker:Markers) => void
+  setSelectedMarker: (marker: Markers) => void;
   setMarkers: (markers: Markers[]) => void;
+  setMarkerPopUp: (markerPopUpVisible: boolean) => void;
 };
 export const useMarkerStore = create<MarkersStore>((set) => ({
   markers: [],
@@ -23,7 +25,7 @@ export const useMarkerStore = create<MarkersStore>((set) => ({
   centerFocus: {
     lat: 0,
     lng: 0,
-  },    
+  },
   selectedMarker: {
     createdDate: "",
     description: "",
@@ -34,7 +36,8 @@ export const useMarkerStore = create<MarkersStore>((set) => ({
     latitude: 0,
     longitude: 0,
     title: "",
-},
+  },
+  markerPopUpVisible: false,
   zoom: 15,
   setDefaultCenter: (marker: Markers) => {
     set(() => ({
@@ -63,11 +66,18 @@ export const useMarkerStore = create<MarkersStore>((set) => ({
             lng: marker.longitude,
           }
         : null,
+      
+    }));
+  },
+  setSelectedMarker: (marker: Markers) => {
+    set(() => ({
+      selectedMarker: marker,
       zoom: 15,
     }));
   },
-  setSelectedMarker: (marker:Markers) =>{set(()=>({
-    selectedMarker: marker,
-    zoom: 15
-}))} ,
+  setMarkerPopUp: (markerPopUpVisible: boolean) => {
+    set(() => ({
+      markerPopUpVisible: markerPopUpVisible,
+    }));
+  },
 }));
