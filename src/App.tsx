@@ -1,17 +1,14 @@
-import { useEffect } from 'react';
-import './App.css';
-import { fetchAllMarkers } from './routes/markers';
-
-
+import { useEffect } from "react";
+import "./App.css";
+import { fetchAllMarkers } from "./routes/markers";
+import WorldMap from "./components/WorldMap";
 
 function App() {
-
   useEffect(() => {
-
     const fetchMarkers = async () => {
       try {
-        const response = await fetchAllMarkers()
-       console.log(response)
+        const response = await fetchAllMarkers();
+        console.log(response);
       } catch (e) {
         console.error(e);
       }
@@ -19,11 +16,11 @@ function App() {
     fetchMarkers();
   }, []);
 
-
   return (
-   <div>
-hi
-   </div>
+    <>
+      <div>hello</div>
+      <WorldMap />
+    </>
   );
 }
 
