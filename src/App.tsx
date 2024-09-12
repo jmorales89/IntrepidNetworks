@@ -14,7 +14,7 @@ function App() {
         setMarkers(response.data)
         setDefaultCenter(response.data[0]);
         setCenterFocus(response.data[0]);
-        console.log(response);
+        
       } catch (e) {
         console.error(e);
       }
