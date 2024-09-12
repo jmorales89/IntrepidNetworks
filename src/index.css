@@ -16,6 +16,14 @@
   background-color: #4384f55d !important;
 }
 
+.p-datascroller .p-datascroller-content{
+  padding: 0;
+
+
+}
+.p-datascroller-content::-webkit-scrollbar {
+  display: none;
+}
 .flagIcon {
   transform: scaleX(-1);
   color: var(--color-primary);

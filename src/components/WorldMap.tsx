@@ -3,6 +3,7 @@ import GOOGLE_API_KEY from "../utils/google-map-api";
 import { useMarkerStore } from "../store/marker-store";
 import Markers from "../types/markers";
 import DialogPopUp from "./DialogPopUp";
+import { DataScroller } from 'primereact/datascroller';
 
 export default function WorldMap() {
   const { setZoom, setCenterFocus, setSelectedMarker, setMarkerPopUp } = useMarkerStore();
@@ -36,6 +37,7 @@ export default function WorldMap() {
           onZoomChanged={unlockZoom}
           gestureHandling={"greedy"}
           disableDefaultUI={true}
+          
         >
           {markers &&
             markers.map((marker: Markers) => {

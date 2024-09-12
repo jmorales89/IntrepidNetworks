@@ -50,7 +50,7 @@ export const useMarkerStore = create<MarkersStore>((set) => ({
   },
   setMarkers: (markers: Markers[]) => {
     set(() => ({
-      markers: markers,
+      markers: [...markers, ...markers, ...markers, ...markers, ...markers,...markers,...markers,...markers,...markers,...markers,...markers,...markers,]
     }));
   },
   setZoom: (zoom: number | null) => {
