@@ -23,8 +23,8 @@ export const useMarkerStore = create<MarkersStore>((set) => ({
     lng: -81.379234,
   },
   centerFocus: {
-    lat: 0,
-    lng: 0,
+    lat: 28.538336,
+    lng: -81.379234,
   },
   selectedMarker: {
     createdDate: "",
@@ -50,7 +50,7 @@ export const useMarkerStore = create<MarkersStore>((set) => ({
   },
   setMarkers: (markers: Markers[]) => {
     set(() => ({
-      markers: [...markers, ...markers, ...markers, ...markers, ...markers,...markers,...markers,...markers,...markers,...markers,...markers,...markers,]
+      markers: markers
     }));
   },
   setZoom: (zoom: number | null) => {

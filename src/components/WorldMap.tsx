@@ -3,7 +3,7 @@ import GOOGLE_API_KEY from "../utils/google-map-api";
 import { useMarkerStore } from "../store/marker-store";
 import Markers from "../types/markers";
 import DialogPopUp from "./DialogPopUp";
-import { DataScroller } from 'primereact/datascroller';
+import useScreenSize from "../customHooks/detectScreenSize";
 
 export default function WorldMap() {
   const { setZoom, setCenterFocus, setSelectedMarker, setMarkerPopUp } = useMarkerStore();
@@ -12,6 +12,8 @@ export default function WorldMap() {
   const centerFocus = useMarkerStore((state) => state.centerFocus);
   const defaultCenter = useMarkerStore((state) => state.defaultCenter);
   const zoom = useMarkerStore((state) => state.zoom);
+  const screenSize = useScreenSize();
+
 
   const displayData = (marker: Markers) => {
     console.log(marker)
@@ -29,7 +31,7 @@ export default function WorldMap() {
       <APIProvider apiKey={GOOGLE_API_KEY}>
         <Map
           onDrag={unlockMap}
-          style={{ width: "100%", height: "100vh" }}
+          style={{ width: "100%", height: `${screenSize.width > 768 ? "100vh": "77vh"}` }}
           defaultCenter={defaultCenter}
           center={centerFocus ? centerFocus : null}
           defaultZoom={15}

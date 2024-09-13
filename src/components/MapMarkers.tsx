@@ -4,18 +4,21 @@ import VideocamIcon from "@mui/icons-material/Videocam";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import FlagIcon from "@mui/icons-material/Flag";
 import { DataScroller } from "primereact/datascroller";
+import useScreenSize from "../customHooks/detectScreenSize";
 
 export default function MapMarkers() {
   const markers = useMarkerStore((state) => state.markers);
   const selectedMarker = useMarkerStore((state) => state.selectedMarker);
   const { setCenterFocus, setSelectedMarker } = useMarkerStore();
+  const screenSize = useScreenSize();
 
   const centerMapOnMarker = (marker: Markers) => {
     setCenterFocus(marker);
     setSelectedMarker(marker);
+  
   };
 
-  const itemTemplate = () => {
+  const markerTemplate = () => {
     return (
 
       markers &&
@@ -66,11 +69,11 @@ export default function MapMarkers() {
   }
 
   return (
-    <>
+    <div>
       <h1 className="bg-white pl-3 font-semibold ">MARKERS</h1>
      
-      <DataScroller className="p-datascroller" value={markers} itemTemplate={itemTemplate} rows={1} inline scrollHeight="95vh" />
+      <DataScroller className="p-datascroller" value={markers} itemTemplate={markerTemplate} rows={1} inline scrollHeight={screenSize.width > 768 ? '95vh' : '20vh'} />
 
-    </>
+    </div>
   );
 }
