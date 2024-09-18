@@ -7,7 +7,7 @@ import { useMarkerStore } from "./store/marker-store";
 
 
 function App() {
-  const { setMarkers, setDefaultCenter, setCenterFocus } = useMarkerStore();
+  const { setMarkers, setDefaultCenter, setCenterFocus, setSelectedMarker } = useMarkerStore();
   
   useEffect(() => {
     const fetchMarkers = async () => {
@@ -16,12 +16,14 @@ function App() {
         setMarkers(response.data);
         setDefaultCenter(response.data[0]);
         setCenterFocus(response.data[0]);
+        setSelectedMarker(response.data[0]);
+       
       } catch (e) {
         console.error(e);
       }
     };
     fetchMarkers();
-  }, [setMarkers, setDefaultCenter, setCenterFocus]);
+  }, [setMarkers, setDefaultCenter, setCenterFocus, setSelectedMarker]);
 
   return (
     <>

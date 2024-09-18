@@ -16,7 +16,6 @@ export default function WorldMap() {
 
 
   const displayData = (marker: Markers) => {
-    console.log(marker)
     setSelectedMarker(marker);
     setMarkerPopUp(true)
   };
